@@ -51,7 +51,10 @@ pub fn osc(
     match osc_type {
         Oscillator::Sine => freq.sin(),
         Oscillator::Square => {
-            let res = freq.sin();
+            let mut res = freq.sin();
+            if res <= f64::EPSILON {
+                res = 0.0;
+            }
             if res > 0.0 {
                 1.0
             } else if res < 0.0 {
