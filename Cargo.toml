@@ -2,6 +2,11 @@
 name = "soundtoys"
 version = "0.1.0"
 edition = "2021"
+description = "A collection of utilities to make working with synths a bit easier."
+license = "GPL-3.0"
+authors = ["tropicbliss <tropicbliss@protonmail.com>"]
+keywords = ["audio", "synth", "audio synthesis"]
+repository = "https://github.com/tropicbliss/soundtoys"
 
 [dependencies]
 atomic_float = "0.1"
