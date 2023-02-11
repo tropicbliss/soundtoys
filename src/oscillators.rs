@@ -110,7 +110,7 @@ impl Default for EnvelopeADSR {
 impl EnvelopeADSR {
     /// Return the amplitude of this envelope for a given time.
     pub fn amplitude(&self, time: f64, time_on: f64, time_off: f64) -> f64 {
-        let mut amplitude = if time_on > time_off {
+        let mut amplitude = if time_on >= time_off {
             let life_time = time - time_on;
             if life_time <= self.attack_time {
                 (life_time / self.attack_time) * self.start_amplitude
