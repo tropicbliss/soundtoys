@@ -51,10 +51,13 @@ pub fn osc(
     match osc_type {
         Oscillator::Sine => freq.sin(),
         Oscillator::Square => {
-            if freq.sin() > 0.0 {
+            let res = freq.sin();
+            if res > 0.0 {
                 1.0
-            } else {
+            } else if res < 0.0 {
                 -1.0
+            } else {
+                0.0
             }
         }
         Oscillator::Triangle => freq.sin().asin() * (2.0 / PI),
@@ -66,7 +69,7 @@ pub fn osc(
                 .sum::<f64>()
                 * (2.0 / PI)
         }
-        Oscillator::SawDig => (2.0 / PI) * (hertz * PI * (time % (1.0 / hertz)) - (PI / 2.0)),
+        Oscillator::SawDig => 2.0 * hertz * (time % (1.0 / hertz)) - 1.0,
         Oscillator::Noise => rand::thread_rng().gen_range(-1.0..=1.0),
     }
 }

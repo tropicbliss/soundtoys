@@ -40,7 +40,7 @@ impl SoundMaker {
         }
     }
 
-    /// Gets the current wall time starting from when this struct is first initialized.
+    /// Gets the current CPU time starting from when this struct is first initialized.
     pub fn get_time(&self) -> f64 {
         self.tick.load(Ordering::Relaxed)
     }

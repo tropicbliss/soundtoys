@@ -16,8 +16,9 @@ pub struct Player {
 
 impl Player {
     /// Creates a new player instance. This spawns an audio thread in the background. Therefore, we are able to add or remove
-    /// notes as the audio plays concurrently.
-    pub fn new() -> Result<Self, AudioError> {
+    /// notes as the audio plays concurrently. You can optionally specify an `amplitude_limit` to avoid blowing
+    /// out your speakers while testing.
+    pub fn new(amplitude_limit: Option<f64>) -> Result<Self, AudioError> {
         let notes: Arc<Mutex<Vec<Note>>> = Arc::new(Mutex::new(Vec::new()));
         let notes_vec_clone = Arc::clone(&notes);
         let host = cpal::default_host();
@@ -38,7 +39,11 @@ impl Player {
                 }
             }
             notes_lock.retain(|n| n.active);
-            mixed_output * 0.2
+            let mut res = mixed_output * 0.2;
+            if let Some(limit) = amplitude_limit {
+                res = res.min(limit);
+            }
+            res
         })?;
         Ok(Self { notes, sound_maker })
     }
