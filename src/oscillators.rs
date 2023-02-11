@@ -52,7 +52,7 @@ pub fn osc(
         Oscillator::Sine => freq.sin(),
         Oscillator::Square => {
             let mut res = freq.sin();
-            if res <= f64::EPSILON {
+            if res.abs() < f64::EPSILON {
                 res = 0.0;
             }
             if res > 0.0 {
@@ -138,7 +138,7 @@ impl EnvelopeADSR {
             };
             ((time - time_off) / self.release_time) * (-release_amplitude) + release_amplitude
         };
-        if amplitude <= f64::EPSILON {
+        if amplitude < f64::EPSILON {
             amplitude = 0.0;
         }
         amplitude
