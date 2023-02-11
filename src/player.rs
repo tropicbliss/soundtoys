@@ -1,4 +1,4 @@
-//! Audio player that provides a thin high-level API over `SoundMaker`
+//! Audio player that provides a thin wrapper over `SoundMaker`.
 
 use crate::{errors::AudioError, instruments::Instrument, note::Note, primitives::SoundMaker};
 use cpal::traits::{DeviceTrait, HostTrait};
