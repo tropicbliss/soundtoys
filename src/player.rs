@@ -49,17 +49,17 @@ impl Player {
     }
 
     /// Adds a note to the queue.
-    pub fn add_note(&self, voice: &Voice) {
+    pub fn add_note(&self, voice: Voice) {
         self.add_notes(vec![voice]);
     }
 
     /// Removes a note from the queue.
-    pub fn remove_note(&self, voices: &Voice) {
+    pub fn remove_note(&self, voices: Voice) {
         self.remove_notes(vec![voices]);
     }
 
     /// Adds multiple notes to the queue in bulk.
-    pub fn add_notes(&self, voices: Vec<&Voice>) {
+    pub fn add_notes(&self, voices: Vec<Voice>) {
         let mut notes = self.notes.lock().unwrap();
         for voice in voices {
             let note_found = notes
@@ -82,12 +82,12 @@ impl Player {
     }
 
     /// Removes multiple notes from the queue in bulk.
-    pub fn remove_notes(&self, voices: Vec<&Voice>) {
+    pub fn remove_notes(&self, voices: Vec<Voice>) {
         let mut notes = self.notes.lock().unwrap();
         for voice in voices {
             let note_found = notes
                 .iter_mut()
-                .find(|n| n.id == voice.note_id + 64 && n.instrument_id == voice.instrument_id);
+                .find(|n| n.id == voice.note_id && n.instrument_id == voice.instrument_id);
             if let Some(found_note) = note_found {
                 if found_note.off <= found_note.on {
                     found_note.off = self.sound_maker.get_time();

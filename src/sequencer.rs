@@ -29,7 +29,7 @@ impl<const BEATS: usize> PercussionSequencerBuilder<BEATS> {
     }
 
     /// Constructs a new `PercussionSequencerBuilder` with a certain tempo.
-    pub fn default_with_tempo(tempo: f64) -> Self {
+    pub fn new_with_tempo(tempo: f64) -> Self {
         Self {
             beats: 4,
             sub_beats: 4,
@@ -70,7 +70,7 @@ impl<const BEATS: usize> PercussionSequencerBuilder<BEATS> {
         PercussionSequencer {
             beat_time: (60.0 / self.tempo) / self.sub_beats as f64,
             current_beat: 0,
-            total_beats: self.sub_beats * self.beats,
+            total_beats: self.sub_beats as usize * self.beats as usize,
             accumulate: 0.0,
             previous: Instant::now(),
             channels: self.channels,
@@ -82,8 +82,8 @@ impl<const BEATS: usize> PercussionSequencerBuilder<BEATS> {
 #[derive(Clone)]
 pub struct PercussionSequencer<const BEATS: usize> {
     beat_time: f64,
-    current_beat: u32,
-    total_beats: u32,
+    current_beat: usize,
+    total_beats: usize,
     accumulate: f64,
     previous: Instant,
     channels: HashMap<InstrumentObj, [PercussiveState; BEATS]>,
@@ -101,11 +101,11 @@ impl<const N: usize> PercussionSequencer<N> {
         while self.accumulate >= self.beat_time {
             self.accumulate -= self.beat_time;
             self.current_beat += 1;
-            if self.current_beat > self.total_beats {
+            if self.current_beat >= self.total_beats {
                 self.current_beat = 0;
             }
             for channel in &self.channels {
-                if channel.1[self.current_beat as usize] == PercussiveState::Beat {
+                if channel.1[self.current_beat] == PercussiveState::Beat {
                     let voice = Voice::new_inner(
                         dyn_clone::clone_box(&*channel.0.instrument),
                         channel.0.instrument_id,
