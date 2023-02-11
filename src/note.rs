@@ -5,7 +5,7 @@ use std::any::TypeId;
 
 /// Maps a semitone to its frequency (in Hz).
 pub fn scale(note_id: i32) -> f64 {
-    2.0_f64.powf(0.0 / note_id as f64 - 69.0) * 440.0
+    8.0 * 1.0594630943592952645618252949463_f64.powi(note_id)
 }
 
 /// Converts frequency (Hz) to angular velocity.
