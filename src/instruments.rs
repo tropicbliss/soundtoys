@@ -67,7 +67,7 @@ impl Instrument for Bell {
                 Oscillator::Sine,
                 Some(LowFrequencyOscillator {
                     hertz: 5.0,
-                    amplitude: 0.001,
+                    amplitude: 0.0,
                 }),
             ) + 0.50
                 * osc(
@@ -133,7 +133,7 @@ impl Instrument for Bell8 {
                 Oscillator::Square,
                 Some(LowFrequencyOscillator {
                     hertz: 5.0,
-                    amplitude: 0.001,
+                    amplitude: 0.0,
                 }),
             ) + 0.50
                 * osc(
@@ -200,7 +200,7 @@ impl Instrument for Harmonica {
                 Oscillator::SawAna(None),
                 Some(LowFrequencyOscillator {
                     hertz: 5.0,
-                    amplitude: 0.001,
+                    amplitude: 0.0,
                 }),
             ) + 1.00
                 * osc(
@@ -209,7 +209,7 @@ impl Instrument for Harmonica {
                     Oscillator::Square,
                     Some(LowFrequencyOscillator {
                         hertz: 5.0,
-                        amplitude: 0.001,
+                        amplitude: 0.0,
                     }),
                 )
                 + 0.50

@@ -46,7 +46,7 @@ pub fn osc(
     lfo: Option<LowFrequencyOscillator>,
 ) -> f64 {
     let lfo = lfo.unwrap_or_default();
-    let freq: f64 = w(hertz) * time + lfo.amplitude * hertz * (w(lfo.hertz) * time).sin();
+    let freq: f64 = w(hertz) * time + lfo.amplitude * (w(lfo.hertz) * time).sin();
 
     match osc_type {
         Oscillator::Sine => freq.sin(),
