@@ -7,7 +7,7 @@ use std::{
     sync::{Arc, Mutex},
 };
 
-/// An audio player that provides a thin high-level API over `SoundMaker` to enable users to pass in sound data in real time.
+/// An audio player that provides a thin wrapper over `SoundMaker` to enable users to pass in sound data in real time.
 /// Like `SoundMaker`, the audio will stop playing after you drop `Player`.
 pub struct Player {
     notes: Arc<Mutex<Vec<Note>>>,
