@@ -34,7 +34,7 @@ impl Player {
                 let mut note_finished = false;
                 let sound = n.channel.sound(time, n.on, n.off, n.id, &mut note_finished);
                 mixed_output += sound;
-                if note_finished && n.off > n.on {
+                if note_finished {
                     n.active = false;
                 }
             }

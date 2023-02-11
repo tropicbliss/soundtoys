@@ -107,7 +107,7 @@ impl SoundMaker {
         instrument: Box<dyn Instrument>,
     ) -> Note {
         Note {
-            id: note_id,
+            id: note_id + 64,
             on: self.get_time(),
             off: 0.0,
             active: true,

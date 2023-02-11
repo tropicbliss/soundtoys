@@ -114,9 +114,7 @@ impl EnvelopeADSR {
             let life_time = time - time_on;
             if life_time <= self.attack_time {
                 (life_time / self.attack_time) * self.start_amplitude
-            } else if life_time > self.attack_time
-                && life_time <= (self.attack_time + self.decay_time)
-            {
+            } else if life_time <= (self.attack_time + self.decay_time) {
                 ((life_time - self.attack_time) / self.decay_time)
                     * (self.sustain_amplitude - self.start_amplitude)
                     + self.start_amplitude
@@ -127,9 +125,7 @@ impl EnvelopeADSR {
             let life_time = time_off - time_on;
             let release_amplitude = if life_time <= self.attack_time {
                 (life_time / self.attack_time) * self.start_amplitude
-            } else if life_time > self.attack_time
-                && life_time <= (self.attack_time + self.decay_time)
-            {
+            } else if life_time <= (self.attack_time + self.decay_time) {
                 ((life_time - self.attack_time) / self.decay_time)
                     * (self.sustain_amplitude - self.start_amplitude)
                     + self.start_amplitude
