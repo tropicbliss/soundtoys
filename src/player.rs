@@ -4,6 +4,7 @@ use crate::{errors::AudioError, instruments::Instrument, note::Note, primitives:
 use cpal::traits::{DeviceTrait, HostTrait};
 use std::{
     any::TypeId,
+    fmt::Debug,
     sync::{Arc, Mutex},
 };
 
@@ -109,6 +110,15 @@ pub struct Voice {
     instrument_id: TypeId,
     note_id: u8,
     instrument_name: &'static str,
+}
+
+impl Debug for Voice {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Voice")
+            .field("note_id", &self.note_id)
+            .field("instrument_name", &self.instrument_name)
+            .finish()
+    }
 }
 
 impl Voice {

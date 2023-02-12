@@ -4,6 +4,7 @@ use crate::{instruments::Instrument, player::Voice};
 use std::{
     any::TypeId,
     collections::HashMap,
+    fmt::Debug,
     hash::{Hash, Hasher},
     time::Instant,
 };
@@ -125,6 +126,12 @@ struct InstrumentObj {
     instrument: Box<dyn Instrument>,
     instrument_id: TypeId,
     instrument_name: &'static str,
+}
+
+impl Debug for InstrumentObj {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.instrument_name)
+    }
 }
 
 impl PartialEq for InstrumentObj {
